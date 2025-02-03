@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from dotenv import load_dotenv
-
+import dj_database_url
 load_dotenv()
 import os
 from pathlib import Path
@@ -29,7 +29,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['dreamerhng2.up.railway.app', '127.0.0.1']
 
 
 # Application definition
@@ -64,7 +65,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'hng_project_stage2.urls'
 
-CORS_ALLOW_ALL_ORIGINS = True
+CSRF_TRUSTED_ORIGINS = ['https://dreamerhng2.up.railway.app']
+
+CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
+CORS_ALLOW_CREDENTIALS = True
+
+
 
 TEMPLATES = [
     {
@@ -84,16 +90,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hng_project_stage2.wsgi.application'
 
+DATABASE_URL = os.getenv('DATABASE_URL')
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL'),
+        # conn_max_age=600
+    )
 }
+
 
 
 # Password validation
