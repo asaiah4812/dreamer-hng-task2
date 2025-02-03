@@ -1,0 +1,1 @@
+web: gunicorn hng_project_stage2.wsgi --log-file -
