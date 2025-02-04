@@ -1,126 +1,157 @@
 # Number Classification API
 
-A Django REST API that takes a number and returns interesting mathematical properties about it, along with a fun fact.
+A sophisticated Django REST API that analyzes numbers, providing mathematical properties and interesting facts. Built for the HNG Stage 2 Backend Task.
 
-## Features
+## 🚀 Live Demo
+- API Endpoint: [Your Railway URL]
+- Documentation: [Your Documentation URL]
 
-- Classifies numbers based on various mathematical properties
-- Provides fun facts about numbers using the Numbers API
-- Handles CORS for cross-origin requests
-- Returns responses in JSON format
-- Input validation and error handling
+## ✨ Features
 
-## API Specification
+- **Number Properties Analysis**
+  - Prime number detection
+  - Perfect number verification
+  - Armstrong number identification
+  - Odd/Even classification
+  - Digit sum calculation
+  
+- **Additional Features**
+  - Fun mathematical facts from Numbers API
+  - Cross-Origin Resource Sharing (CORS) support
+  - Fast response time (< 500ms)
+  - Comprehensive error handling
+  - JSON response format
 
-### Endpoint 
+## 📖 API Documentation
 
-## Error Handling
-
-The API handles various error cases:
-- Invalid input (non-numeric values)
-- Missing number parameter
-- Server-side errors
-
-## Deployment
-
-This API is deployed at: [Add your deployment URL here]
-
-## CORS Configuration
-
-The API is configured to handle CORS (Cross-Origin Resource Sharing) and accepts requests from:
-- http://localhost:8080
-- http://127.0.0.1:9000
-- [Add any other allowed origins]
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-[Add your license here]
-
-## Contact
-
-[Add your contact information here]
-
-## Acknowledgments
-
-- [Numbers API](http://numbersapi.com) for providing number facts
-- [Add any other acknowledgments]
-
-### Success Response (200 OK) 
-
-## Dependencies
-
-- Django 5.1.5
-- Django REST Framework 3.15.2
-- Django CORS Headers 4.6.0
-- Requests 2.31.0
-
-## API Usage Examples
-
-1. Get properties of number 371:
+### Base URL
 ```
-GET /api/classify-number?number=371
+https://[your-railway-url]/api
 ```
 
-2. Get properties of number 28:
-```
-GET /api/classify-number?number=28
+### Endpoints
+
+#### Get Number Properties
+```http
+GET /classify-number?number={integer}
 ```
 
-3. Invalid input:
-```
-GET /api/classify-number?number=abc
+##### Parameters
+| Name   | Type    | Description                |
+|--------|---------|----------------------------|
+| number | integer | The number to be analyzed  |
+
+##### Success Response (200 OK)
+```json
+{
+    "number": 371,
+    "is_prime": false,
+    "is_perfect": false,
+    "properties": ["armstrong", "odd"],
+    "digit_sum": 11,
+    "fun_fact": "371 is an Armstrong number..."
+}
 ```
 
-## Properties Explained
+##### Error Response (400 Bad Request)
+```json
+{
+    "number": "invalid_input",
+    "error": true
+}
+```
 
-- **is_prime**: Checks if the number is prime (only divisible by 1 and itself)
-- **is_perfect**: Checks if the number equals the sum of its proper divisors
-- **properties**: Array containing "armstrong" and/or "odd"/"even"
-- **digit_sum**: Sum of all digits in the number
+### Property Definitions
+
+- **is_prime**: True if the number is only divisible by 1 and itself
+- **is_perfect**: True if the number equals the sum of its proper divisors
+- **properties**: Array containing combinations of:
+  - "armstrong" - if the sum of its digits raised to the power of number of digits equals the number
+  - "odd"/"even" - based on number's parity
+  - "negative" - for negative numbers
+- **digit_sum**: Sum of all digits in the absolute value of the number
 - **fun_fact**: Interesting mathematical fact about the number
 
-## Local Development Setup
+## 🛠️ Technology Stack
 
-1. Clone the repository
+- Python 3.13.1
+- Django 5.1.5
+- Django REST Framework
+- Railway for deployment
+- Numbers API integration
+
+## ⚙️ Local Development
+
+1. **Clone the Repository**
 ```bash
-git clone <repository-url>
-cd <project-directory>
+git clone https://github.com/asaiah4812/dreamer-hng-task2.git
+cd dreamer-hng-task2
 ```
 
-2. Create and activate a virtual environment
+2. **Set Up Virtual Environment**
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-3. Install dependencies
+3. **Install Dependencies**
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Run migrations
+4. **Run Development Server**
 ```bash
 python manage.py migrate
-```
-
-5. Start the development server
-```bash
 python manage.py runserver
 ```
 
-The API will be available at `http://localhost:8000/api/classify-number`
+5. **Access the API**
+```
+http://localhost:8000/api/classify-number?number=371
+```
 
-## Testing
+## 🚀 Deployment
 
-To run the tests:
+This project is configured for deployment on Railway:
+
+1. Push your code to GitHub
+2. Connect your GitHub repository to Railway
+3. Add environment variables:
+   - `SECRET_KEY`: Your Django secret key
+   - `DEBUG`: False
+4. Deploy!
+
+
+## ⚡ Performance Optimizations
+
+- Caching for external API calls
+- Optimized mathematical calculations
+- Response time monitoring
+- Error handling with timeouts
+
+## 🧪 Testing
+
+Run the test suite:
 ```bash
 python manage.py test
 ```
+
+## 👨‍💻 Developer
+
+**Asaiah Henson**
+- GitHub: [@asaiah4812](https://github.com/asaiah4812)
+- Project Link: [dreamer-hng-task2](https://github.com/asaiah4812/dreamer-hng-task2)
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Numbers API](http://numbersapi.com) for providing mathematical facts
+- HNG Internship for the project requirements
+- Django and DRF communities
+
+## 📞 Support
+
+For support, email hensonasaiah21@gmail.com or create an issue in the GitHub repository.
